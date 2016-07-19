@@ -1,10 +1,7 @@
-var crypto = require('crypto')
-var fs = require('fs')
-var path = require('path')
+((crypto,fs,path)=>{
+  var fingerprintPath = path.resolve(__dirname, '..', '..', 'node_modules', '.atom-ci-fingerprint')
 
-var fingerprintPath = path.resolve(__dirname, '..', '..', 'node_modules', '.atom-ci-fingerprint')
-
-module.exports = {
+  module.exports = {
   fingerprint: function () {
     var packageJson = fs.readFileSync(path.resolve(__dirname, '..', '..', 'package.json'))
 
@@ -33,3 +30,7 @@ module.exports = {
     return this.readFingerprint() && this.readFingerprint() === this.fingerprint()
   }
 }
+
+  
+})(require('crypto'),require('fs'), require('path'))
+
